@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Derivative_and_Integral_Calculator
+{
+    enum CharacterType
+    {
+        Number, 
+        Variable, 
+        Plus,
+        Minus,
+        Multiply, 
+        Divide,
+        Power,
+        SquareRoot,
+        Sin,
+        Cos,
+        Tan,
+        Csc,
+        Sec,
+        Cot,
+        Ln,
+        Log,
+        e,
+        pi,
+        LeftParenthesis,
+        RightParenthesis,
+
+
+
+    }
+    class CharacterRecognizer
+    {
+        public CharacterType CharacterType;
+        public string Text;
+    }
+}
