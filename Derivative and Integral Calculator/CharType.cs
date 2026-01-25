@@ -26,13 +26,7 @@ namespace Derivative_and_Integral_Calculator
         pi,
         LeftParenthesis,
         RightParenthesis,
+        End,
 
-
-
-    }
-    class CharacterRecognizer
-    {
-        public CharacterType CharacterType;
-        public string Text;
     }
 }
