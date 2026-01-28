@@ -4,21 +4,21 @@ using System.Text;
 
 namespace Derivative_and_Integral_Calculator
 {
-    class CharGrouper
+    class FuncGrouper
     {
         private string input;
         private int position; // Current position in the input string
 
-        public CharGrouper(string input)
+        public FuncGrouper(string input)
         {
             this.input = input.Replace(" ", ""); // Remove whitespace
             position = 0;
         }
 
         // Groups characters into meaningful tokens
-        public List<Character> GroupCharacters()
+        public List<Function> GroupCharacters()
         {
-            var groups = new List<Character>();
+            var groups = new List<Function>();
 
             // Iterate through the input string
             while (position < input.Length)
@@ -37,7 +37,7 @@ namespace Derivative_and_Integral_Calculator
                 //Variables
                 if (char.IsLetter(currentChar))
                 {
-                    groups.Add(new Character(CharacterType.Variable, currentChar.ToString()));
+                    groups.Add(new Function(FunctionType.Variable, currentChar.ToString()));
                     position++;
                     continue;
                 }
@@ -46,34 +46,34 @@ namespace Derivative_and_Integral_Calculator
                 switch (currentChar)
                 {
                     case '+':
-                        groups.Add(new Character(CharacterType.Plus, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.Plus, currentChar.ToString()));
                         break;
                     case '-':
-                        groups.Add(new Character(CharacterType.Minus, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.Minus, currentChar.ToString()));
                         break;
                     case '*':
-                        groups.Add(new Character(CharacterType.Multiply, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.Multiply, currentChar.ToString()));
                         break;
                     case '/':
-                        groups.Add(new Character(CharacterType.Divide, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.Divide, currentChar.ToString()));
                         break;
                     case '^':
-                        groups.Add(new Character(CharacterType.Power, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.Power, currentChar.ToString()));
                         break;
                     case '√':
-                        groups.Add(new Character(CharacterType.SquareRoot, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.SquareRoot, currentChar.ToString()));
                         break;
                     case 'e':
-                        groups.Add(new Character(CharacterType.e, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.e, currentChar.ToString()));
                         break;
                     case 'π':
-                        groups.Add(new Character(CharacterType.pi, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.pi, currentChar.ToString()));
                         break;
                     case '(':
-                        groups.Add(new Character(CharacterType.LeftParenthesis, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.LeftParenthesis, currentChar.ToString()));
                         break;
                     case ')':
-                        groups.Add(new Character(CharacterType.RightParenthesis, currentChar.ToString()));
+                        groups.Add(new Function(FunctionType.RightParenthesis, currentChar.ToString()));
                         break;
                     default:
                         throw new Exception($"Unrecognized character: {currentChar}");
@@ -88,13 +88,13 @@ namespace Derivative_and_Integral_Calculator
                             string func = input.Substring(position, 3);
                             if (func == "sin")
                             {
-                                groups.Add(new Character(CharacterType.Sin, func));
+                                groups.Add(new Function(FunctionType.Sin, func));
                                 position += 3;
                                 continue;
                             }
                             else if (func == "sec")
                             {
-                                groups.Add(new Character(CharacterType.Sec, func));
+                                groups.Add(new Function(FunctionType.Sec, func));
                                 position += 3;
                                 continue;
                             }
@@ -106,19 +106,19 @@ namespace Derivative_and_Integral_Calculator
                             string func = input.Substring(position, 3);
                             if (func == "cos")
                             {
-                                groups.Add(new Character(CharacterType.Cos, func));
+                                groups.Add(new Function(FunctionType.Cos, func));
                                 position += 3;
                                 continue;
                             }
                             else if (func == "csc")
                             {
-                                groups.Add(new Character(CharacterType.Csc, func));
+                                groups.Add(new Function(FunctionType.Csc, func));
                                 position += 3;
                                 continue;
                             }
                             else if(func == "cot")
                             {
-                                groups.Add(new Character(CharacterType.Cot, func));
+                                groups.Add(new Function(FunctionType.Cot, func));
                                 position += 3;
                                 continue;
                             } 
@@ -130,7 +130,7 @@ namespace Derivative_and_Integral_Calculator
                             string func = input.Substring(position, 3);
                             if (func == "tan")
                             {
-                                groups.Add(new Character(CharacterType.Tan, func));
+                                groups.Add(new Function(FunctionType.Tan, func));
                                 position += 3;
                                 continue;
                             }
@@ -142,13 +142,13 @@ namespace Derivative_and_Integral_Calculator
                             string func = input.Substring(position, 2);
                             if (func == "ln")
                             {
-                                groups.Add(new Character(CharacterType.Ln, func));
+                                groups.Add(new Function(FunctionType.Ln, func));
                                 position += 2;
                                 continue;
                             }
                             else if (func == "log")
                             {
-                                groups.Add(new Character(CharacterType.Log, func));
+                                groups.Add(new Function(FunctionType.Log, func));
                                 position += 3;
                                 continue;
                             }
@@ -158,12 +158,12 @@ namespace Derivative_and_Integral_Calculator
 
                 position++;
             }
-            groups.Add(new Character(CharacterType.End, "")); // End of input marker
+            groups.Add(new Function(FunctionType.End, "")); // End of input marker
             return groups;
         }
 
         // Reads a number (including decimals) from the input
-        private Character ReadNumber()
+        private Function ReadNumber()
         {
             int start = position;
             // Move position forward while characters are digits or decimal points
@@ -173,7 +173,7 @@ namespace Derivative_and_Integral_Calculator
             }
             // Extract the number substring
             string numberText = input.Substring(start, position - start);
-            return new Character(CharacterType.Number, numberText);
+            return new Function(FunctionType.Number, numberText);
         }
     }
 }

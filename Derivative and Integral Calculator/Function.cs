@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Derivative_and_Integral_Calculator
 {
-    class Character
+    class Function
     {
-        public CharacterType Type;
+        public FunctionType Type;
         public string Text;
 
-        public Character(CharacterType type, string text)
+        public Function(FunctionType type, string text)
         {
             Type = type;
             Text = text;
