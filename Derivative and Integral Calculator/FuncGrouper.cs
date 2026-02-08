@@ -15,9 +15,21 @@ namespace Derivative_and_Integral_Calculator
             position = 0;
         }
 
+        // Main method to group characters and handle implicit multiplication
+        /*
+        public List<Function> FinalGroup()
+        {
+            List<Function> functions = GroupCharacters();
+            functions = InsertImplicitMultiplication(functions);
+            functions.Add(new Function(FunctionType.End, "")); // End of input marker
+            return functions;
+        }
+        */
+
         // Groups characters into meaningful tokens
         public List<Function> GroupCharacters()
         {
+            position = 0;
             var groups = new List<Function>();
 
             // Iterate through the input string
@@ -37,9 +49,36 @@ namespace Derivative_and_Integral_Calculator
                 //Variables
                 if (char.IsLetter(currentChar))
                 {
-                    groups.Add(new Function(FunctionType.Variable, currentChar.ToString()));
-                    position++;
-                    continue;
+                    // Identifiers: variables or functions
+                    if (char.IsLetter(currentChar))
+                    {
+                        int start = position;
+
+                        while (position < input.Length && char.IsLetter(input[position]))
+                            position++;
+
+                        string ident = input.Substring(start, position - start);
+
+                        switch (ident)
+                        {
+                            case "sin": groups.Add(new Function(FunctionType.Sin, ident)); break;
+                            case "cos": groups.Add(new Function(FunctionType.Cos, ident)); break;
+                            case "tan": groups.Add(new Function(FunctionType.Tan, ident)); break;
+                            case "sec": groups.Add(new Function(FunctionType.Sec, ident)); break;
+                            case "csc": groups.Add(new Function(FunctionType.Csc, ident)); break;
+                            case "cot": groups.Add(new Function(FunctionType.Cot, ident)); break;
+                            case "ln": groups.Add(new Function(FunctionType.Ln, ident)); break;
+                            case "log": groups.Add(new Function(FunctionType.Log, ident)); break;
+                            case "e": groups.Add(new Function(FunctionType.e, ident)); break;
+                            case "pi": groups.Add(new Function(FunctionType.pi, ident)); break;
+                            default:
+                                groups.Add(new Function(FunctionType.Variable, ident));
+                                break;
+                        }
+
+                        continue;
+                    }
+
                 }
 
                 //Single Character Operators and Functions
@@ -158,9 +197,41 @@ namespace Derivative_and_Integral_Calculator
 
                 position++;
             }
-            groups.Add(new Function(FunctionType.End, "")); // End of input marker
+            groups.Add(new Function(FunctionType.End, "")); // End of input marker (Remove when implementing implicit multiplication)
             return groups;
         }
+
+        // Inserts implicit multiplication operators where needed (e.g., between a number and a variable, or between a variable and a function)
+        /*
+        private List<Function> InsertImplicitMultiplication(List<Function> functions)
+        {
+            var result = new List<Function>();
+
+            for(int i = 0; i < functions.Count - 1; i++)
+            {
+                Function current = functions[i];
+                Function next = functions[i + 1];
+
+                result.Add(current);
+
+                bool needsMultiplication =
+                    (current.Type == FunctionType.Number ||
+                    current.Type == FunctionType.Variable ||
+                    current.Type == FunctionType.RightParenthesis) 
+                    &&
+                    (next.Type == FunctionType.Number ||
+                    next.Type == FunctionType.Variable ||
+                    next.Type == FunctionType.LeftParenthesis);
+
+                if(needsMultiplication)
+                {
+                    result.Add(new Function(FunctionType.Multiply, "*"));
+                }
+            }
+
+
+        }
+        */
 
         // Reads a number (including decimals) from the input
         private Function ReadNumber()

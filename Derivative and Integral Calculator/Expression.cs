@@ -45,4 +45,81 @@ namespace Derivative_and_Integral_Calculator
             return "x";
         }
     }
+
+    class AddExpression : Expression
+    {
+        public Expression Left;
+        public Expression Right;
+
+        public AddExpression(Expression left, Expression right)
+        {
+            Left = left;
+            Right = right;
+        }
+
+        public override Expression Differentiate()
+        {
+            //Sum Rule: (f + g)' = f' + g'
+            return new AddExpression(Left.Differentiate(), Right.Differentiate());
+        }
+
+        public override string ToString()
+        {
+            return $"({Left} + {Right})";
+
+        }
+    }
+
+    class ProductExpression : Expression
+    {
+        public Expression Left;
+        public Expression Right;
+
+        public ProductExpression(Expression left, Expression right)
+        {
+            Left = left;
+            Right = right;
+        }
+
+        public override Expression Differentiate()
+        {
+            //Product Rule: (f * g)' = (f' * g) + (f * g')
+            return new AddExpression(
+                new ProductExpression(Left.Differentiate(), Right),
+                new ProductExpression(Left, Right.Differentiate())
+            );
+        }
+
+        public override string ToString()
+        {
+            return $"({Left} * {Right})";
+        }
+    }
+
+    class PowerExpression : Expression
+    {
+        public Expression Base;
+        public int Exponent;
+
+        public PowerExpression(Expression baseExpr, int exponent)
+        {
+            Base = baseExpr;
+            Exponent = exponent;
+        }
+
+        public override Expression Differentiate()
+        {
+            //Power Rule: (f^n)' = n * f^(n-1)
+
+            return new ProductExpression (
+                new ConstantExpression(Exponent),
+                new PowerExpression(Base, Exponent - 1)
+            );
+        }
+
+        public override string ToString()
+        {
+            return $"({Base}^{Exponent})";
+        }
+    }
 }
