@@ -9,20 +9,24 @@ namespace Derivative_and_Integral_Calculator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string input = "x + 3*x^2";
+            string input = "0.5*x^2 + (2*x + 0.5*x^2)";
             var functionGrouper = new FuncGrouper(input);
             List<Function> functions = functionGrouper.GroupCharacters();
 
+            /*
             foreach(var f in functions)
             {
                 Console.Text += f.Type + " ";
             }
+            */
             var functionParser = new Parser(functions);
 
             Expression expression = functionParser.Parse();
 
             Expression derivative = expression.Differentiate();
-            Console.Text = derivative.ToString();
+
+            Expression simplified = derivative.Simplify();
+            Console.Text = simplified.ToString();
 
 
         }
