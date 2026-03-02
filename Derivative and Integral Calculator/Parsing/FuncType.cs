@@ -7,7 +7,7 @@ namespace Derivative_and_Integral_Calculator.Parsing
     enum FunctionType
     {
         Number, 
-        Variable, 
+        Variable,
         Plus,
         Minus,
         Multiply, 

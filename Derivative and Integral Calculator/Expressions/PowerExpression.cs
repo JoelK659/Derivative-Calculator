@@ -30,27 +30,27 @@ namespace Derivative_and_Integral_Calculator.Expressions
             return $"({Base}^{Exponent})";
         }
 
-        public override Expression Simplify()
-        {
-            //Simplify the base
-            var simplifiedBase = Base.Simplify();
-            //If the exponent is zero, the result is 1
-            if (Exponent == 0)
-            {
-                return new ConstantExpression(1);
-            }
-            //If the exponent is one, return the base
-            if (Exponent == 1)
-            {
-                return simplifiedBase;
-            }
-            //If the base is a constant, we can compute the power
-            if (simplifiedBase is ConstantExpression baseConst)
-            {
-                return new ConstantExpression(Math.Pow(baseConst.Value, Exponent));
-            }
-            //Otherwise, return a new PowerExpression with the simplified base
-            return new PowerExpression(simplifiedBase, Exponent);
-        }
+        //public override Expression Simplify()
+        //{
+        //    //Simplify the base
+        //    var simplifiedBase = Base.Simplify();
+        //    //If the exponent is zero, the result is 1
+        //    if (Exponent == 0)
+        //    {
+        //        return new ConstantExpression(1);
+        //    }
+        //    //If the exponent is one, return the base
+        //    if (Exponent == 1)
+        //    {
+        //        return simplifiedBase;
+        //    }
+        //    //If the base is a constant, we can compute the power
+        //    if (simplifiedBase is ConstantExpression baseConst)
+        //    {
+        //        return new ConstantExpression(Math.Pow(baseConst.Value, Exponent));
+        //    }
+        //    //Otherwise, return a new PowerExpression with the simplified base
+        //    return new PowerExpression(simplifiedBase, Exponent);
+        //}
     }
 }

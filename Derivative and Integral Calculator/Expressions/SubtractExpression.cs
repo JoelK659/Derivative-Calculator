@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Derivative_and_Integral_Calculator.Expressions
 {
-    class ProductExpression : Expression
+    class SubtractExpression : Expression
     {
         public Expression Left;
         public Expression Right;
 
-        public ProductExpression(Expression left, Expression right)
+        public SubtractExpression(Expression left, Expression right)
         {
             Left = left;
             Right = right;
@@ -17,21 +17,17 @@ namespace Derivative_and_Integral_Calculator.Expressions
 
         public override Expression Differentiate()
         {
-            // Product rule: f'g + fg'
-            return new AddExpression(
-                new ProductExpression(Left.Differentiate(), Right),
-                new ProductExpression(Left, Right.Differentiate())
-            );
+            return new SubtractExpression(Left.Differentiate(), Right.Differentiate());
         }
 
         public override string ToString()
         {
-            return $"({Left}{Right})";
+            return $"({Left} - {Right})";
         }
 
         //public override Expression Simplify()
         //{
-            
+
         //}
     }
 }

@@ -10,7 +10,7 @@ namespace Derivative_and_Integral_Calculator.Expressions
         public abstract Expression Differentiate();
         //Each expression should know how to represent itself as a string
         public abstract override string ToString();
-
-        public abstract Expression Simplify();
+        //Each expression should know how to simplify itself
+        //public abstract Expression Simplify();
     }
 }

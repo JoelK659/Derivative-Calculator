@@ -8,6 +8,8 @@ namespace Derivative_and_Integral_Calculator.Parsing
 {
 
     // The Parser class takes a list of functions (tokens) and constructs an expression tree that represents the mathematical expression. It uses recursive descent parsing to handle operator precedence and associativity.
+    //Ex. for the expression "2x + 3", the FuncGrouper would produce a list of functions: [Number(2), Variable(x), Plus, Number(3)].
+    //The Parser would then take this list and construct an expression tree that represents the addition of the product of 2 and x with 3.
     class Parser
     {
         private List<Function> Functions;
@@ -34,6 +36,7 @@ namespace Derivative_and_Integral_Calculator.Parsing
         // Parses addition and subtraction
         private Expression ParseExpression()
         {
+            // Start by parsing the first term (which could be a product or a factor)
             Expression expression = ParseTerm();
 
             while (Match(FunctionType.Plus, FunctionType.Minus))
@@ -47,7 +50,7 @@ namespace Derivative_and_Integral_Calculator.Parsing
                 }
                 else
                 {
-                    expression = new AddExpression(expression, new ProductExpression(new ConstantExpression(-1), right));
+                    expression = new SubtractExpression(expression, right);
                 }
             }
             return expression;
@@ -56,6 +59,7 @@ namespace Derivative_and_Integral_Calculator.Parsing
         // Parses multiplication and division
         private Expression ParseTerm()
         {
+            
             Expression expression = ParseFactor();
 
             while (true)
@@ -192,7 +196,10 @@ namespace Derivative_and_Integral_Calculator.Parsing
         // Checks if the next function starts a factor (number, variable, left parenthesis, or minus) Ex: 2x, (x + 1), -x
         private bool NextStartsFactor()
         {
-            if (position >= Functions.Count) return false;
+            if (position >= Functions.Count)
+            {
+                return false;
+            }
 
             var nextType = Functions[position].Type;
 
@@ -205,7 +212,10 @@ namespace Derivative_and_Integral_Calculator.Parsing
             {
                 // Check that previous token was NOT a divide
                 if (position > 0 && Functions[position - 1].Type == FunctionType.Divide)
+                {
                     return false;
+                }
+                    
 
                 return true;
             }
