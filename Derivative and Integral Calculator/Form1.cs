@@ -1,3 +1,6 @@
+using Derivative_and_Integral_Calculator.Expressions;
+using Derivative_and_Integral_Calculator.Parsing;
+
 namespace Derivative_and_Integral_Calculator
 {
     public partial class Form1 : Form
@@ -9,7 +12,7 @@ namespace Derivative_and_Integral_Calculator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string input = "0.5*x^2 + (2*x + 0.5*x^2)";
+            string input = "(3x^2)(4x+3)";
             var functionGrouper = new FuncGrouper(input);
             List<Function> functions = functionGrouper.GroupCharacters();
 
@@ -22,8 +25,9 @@ namespace Derivative_and_Integral_Calculator
             var functionParser = new Parser(functions);
 
             Expression expression = functionParser.Parse();
+            Expression simplifiedExpr = expression.Simplify();
 
-            Expression derivative = expression.Differentiate();
+            Expression derivative = simplifiedExpr.Differentiate();
 
             Expression simplified = derivative.Simplify();
             Console.Text = simplified.ToString();

@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using Derivative_and_Integral_Calculator.Expressions;
 
-namespace Derivative_and_Integral_Calculator
+namespace Derivative_and_Integral_Calculator.Parsing
 {
+
+    // The Parser class takes a list of functions (tokens) and constructs an expression tree that represents the mathematical expression. It uses recursive descent parsing to handle operator precedence and associativity.
     class Parser
     {
         private List<Function> Functions;
         private int position;
+        private FunctionType? previousFunction = null; 
         
         public Parser(List<Function> functions)
         {
@@ -49,18 +53,43 @@ namespace Derivative_and_Integral_Calculator
             return expression;
         }
 
-        // Parses multiplication
+        // Parses multiplication and division
         private Expression ParseTerm()
         {
             Expression expression = ParseFactor();
 
-            while (Match(FunctionType.Multiply))
+            while (true)
             {
-                Expression right = ParseFactor();
-                expression = new ProductExpression(expression, right);
+                // Explicit multiplication
+                if (Match(FunctionType.Multiply))
+                {
+                    Expression right = ParseFactor();
+                    expression = new ProductExpression(expression, right);
+                }
+
+                // Division
+                else if (Match(FunctionType.Divide))
+                {
+                    Expression right = ParseFactor(); // Parse denominator as a single factor
+                    expression = new DivideExpression(expression, right);
+                }
+
+                // Implicit multiplication (skip if previous token was divide)
+                else if (NextStartsFactor())
+                {
+                    Expression right = ParseFactor();
+                    expression = new ProductExpression(expression, right);
+                }
+
+                else
+                {
+                    break;
+                }
             }
+
             return expression;
         }
+
 
         // Parses exponentiation
         private Expression ParseFactor()
@@ -101,7 +130,7 @@ namespace Derivative_and_Integral_Calculator
 
             if (Match(FunctionType.Variable))
             {
-                return new VariableExpression();
+                return new VariableExpression(Previous().Text);
             }
 
             if(Match(FunctionType.LeftParenthesis))
@@ -123,6 +152,7 @@ namespace Derivative_and_Integral_Calculator
             {
                 if (Check(type))
                 {
+                    previousFunction = Functions[position].Type;
                     position++;
                     return true;
                 }
@@ -150,12 +180,56 @@ namespace Derivative_and_Integral_Calculator
         {
             if (Check(type))
             {
+                previousFunction = Functions[position].Type;
                 position++;
                 return;
             }
             else
             {
                 throw new Exception($"Expected function of type {type} but found {Functions[position].Type}");
+            }
+        }
+        // Checks if the next function starts a factor (number, variable, left parenthesis, or minus) Ex: 2x, (x + 1), -x
+        private bool NextStartsFactor()
+        {
+            if (position >= Functions.Count) return false;
+
+            var nextType = Functions[position].Type;
+
+            // Only allow implicit multiplication for number, variable, left parenthesis, or functions
+            // Do NOT allow it immediately after a division operator
+            if (nextType == FunctionType.Number ||
+                nextType == FunctionType.Variable ||
+                nextType == FunctionType.LeftParenthesis ||
+                IsFunctionType(nextType))
+            {
+                // Check that previous token was NOT a divide
+                if (position > 0 && Functions[position - 1].Type == FunctionType.Divide)
+                    return false;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        // Helper to detect multi-character functions
+        private bool IsFunctionType(FunctionType type)
+        {
+            switch (type)
+            {
+                case FunctionType.Sin:
+                case FunctionType.Cos:
+                case FunctionType.Tan:
+                case FunctionType.Csc:
+                case FunctionType.Sec:
+                case FunctionType.Cot:
+                case FunctionType.Ln:
+                case FunctionType.Log:
+                case FunctionType.SquareRoot:
+                    return true;
+                default:
+                    return false;
             }
         }
 

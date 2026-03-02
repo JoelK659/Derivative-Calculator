@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Derivative_and_Integral_Calculator
+namespace Derivative_and_Integral_Calculator.Parsing
 {
     class Function
     {
