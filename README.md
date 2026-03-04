@@ -71,7 +71,7 @@ Derivative: 36x^2 + 18x
 ### How to Use
 1. Clone or download the repository.
 2. Open the project in Visual Studio or another C# IDE.
-3. Open Form1.cs and replace the input string on line 15 with your desired expression (##Division must have parentheses around numerator and denominator)
+3. Open Form1.cs and replace the input string on line 15 with your desired expression (**Division must have parentheses around numerator and denominator**)
 4. Run the console application
 ---
 
