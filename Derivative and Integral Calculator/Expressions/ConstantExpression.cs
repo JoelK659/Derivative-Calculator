@@ -22,9 +22,9 @@ namespace Derivative_and_Integral_Calculator.Expressions
             return Value.ToString();
         }
 
-        //public override Expression Simplify()
-        //{
-        //    return this;
-        //}
+        public override Expression Simplify()
+        {
+            return this;
+        }
     }
 }

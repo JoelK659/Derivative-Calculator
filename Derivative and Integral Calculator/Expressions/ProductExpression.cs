@@ -26,12 +26,53 @@ namespace Derivative_and_Integral_Calculator.Expressions
 
         public override string ToString()
         {
-            return $"({Left}{Right})";
+            //return $"{Left}{Right}";
+            return $"({Left} * {Right})";
         }
 
-        //public override Expression Simplify()
-        //{
-            
-        //}
+        public override Expression Simplify()
+        {
+            Left = Left.Simplify();
+            Right = Right.Simplify();
+
+            //Zero Rule: 0 * x = 0
+            if(Left is ConstantExpression constExpr && constExpr.Value == 0)
+            {
+                return new ConstantExpression(0);
+            }
+            if(Right is ConstantExpression constExpr2 && constExpr2.Value == 0)
+            {
+                return new ConstantExpression(0);
+            }
+
+            //One Rule: 1 * x = x
+            if(Left is ConstantExpression constExpr3 && constExpr3.Value == 1)
+            {
+                return Right;
+            }
+            if(Right is ConstantExpression constExpr4 && constExpr4.Value == 1)
+            {
+                return Left;
+            }
+
+            //Constant Rule: 2 * 3 = 6
+            if(Left is ConstantExpression constExpr5 && Right is ConstantExpression constExpr6)
+            {
+                return new ConstantExpression(constExpr5.Value * constExpr6.Value);
+            }
+
+            //Nested Product: (x * y) * z = x * (y * z)
+            if(Left is ProductExpression leftProd && leftProd.Right is ConstantExpression leftProdRightConst)
+            {
+                return new ProductExpression(leftProd.Left, new ConstantExpression(leftProdRightConst.Value * (Right is ConstantExpression rightConst ? rightConst.Value : 1))).Simplify();
+            }
+            if(Right is ProductExpression rightProd && rightProd.Left is ConstantExpression rightProdLeftConst)
+            {
+                return new ProductExpression(new ConstantExpression(rightProdLeftConst.Value * (Left is ConstantExpression leftConst ? leftConst.Value : 1)), rightProd.Right).Simplify();
+            }
+
+
+            return new ProductExpression(Left, Right);
+        }
     }
 }

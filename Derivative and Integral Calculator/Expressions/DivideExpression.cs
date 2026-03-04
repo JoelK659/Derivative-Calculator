@@ -25,11 +25,34 @@ class DivideExpression : Expression
 
     public override string ToString()
     {
+       // return $"{Numerator} / {Denominator}";
         return $"({Numerator} / {Denominator})";
+
     }
 
-    //public override Expression Simplify()
-    //{
-        
-    //}
+    public override Expression Simplify()
+    {
+        Numerator = Numerator.Simplify();
+        Denominator = Denominator.Simplify();
+
+        // Zero rule: 0/ x = 0
+        if (Numerator is ConstantExpression numConst && numConst.Value == 0)
+        {
+            return new ConstantExpression(0);
+        }
+
+        // One rule: x / 1 = x
+        if (Denominator is ConstantExpression denomConst && denomConst.Value == 1)
+        {
+            return Numerator;
+        }
+
+        //Constant rule: 6 / 3 = 2
+        if (Numerator is ConstantExpression numConst2 && Denominator is ConstantExpression denomConst2)
+        {
+            return new ConstantExpression(Math.Round((numConst2.Value / denomConst2.Value), 2));
+        }
+
+        return new DivideExpression(Numerator, Denominator);
+    }
 }
