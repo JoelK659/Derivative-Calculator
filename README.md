@@ -44,6 +44,8 @@ The system functions similarly to a lightweight computer algebra system.
   3       Power  4     x
            / \
           x   2
+           
+           
 ---
 
 
