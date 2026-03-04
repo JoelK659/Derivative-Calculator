@@ -33,7 +33,19 @@ The system functions similarly to a lightweight computer algebra system.
 - Implicit multiplication support (e.g., `4x`, `(x+1)(x-1)`)
 - Quotient rule support
 
+### Example Expression Tree
+
+##3x^2 + 4x
+
+           Add
+          /   \
+      Product  Product
+      /     \   /    \
+  3       Power  4     x
+           / \
+          x   2
 ---
+
 
 ## Supported Operations
 
@@ -45,12 +57,12 @@ The system functions similarly to a lightweight computer algebra system.
 
 ### Example Inputs
 x^3 + 2x
-(3x^2)(4x+3)
-(x^2 + 1)/(x+1)
-
+x / 2x + 1
+2 * x * x
 ### Example Output
 Input: (3x^2)(4x+3)
 Derivative: 36x^2 + 18x
+
 
 ---
 
