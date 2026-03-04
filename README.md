@@ -37,14 +37,17 @@ The system functions similarly to a lightweight computer algebra system.
 
 ##3x^2 + 4x
 
-           Add
-          /   \
-      Product  Product
-      /     \   /    \
-  3       Power  4     x
-           / \
-          x   2
-           
+```
+       Add
+      /   \
+  Product  Product
+  /     \   /    \
+0     Product  3     x
+      /     \
+     3     Power
+           /   \
+          x     1
+```           
            
 ---
 
