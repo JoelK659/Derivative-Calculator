@@ -35,7 +35,7 @@ The system functions similarly to a lightweight computer algebra system.
 
 ### Example Expression Tree
 
-##3x^2 + 4x
+## 3x^2 + 4x
 
 ```
        Add
