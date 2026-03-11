@@ -61,9 +61,9 @@ The system functions similarly to a lightweight computer algebra system.
 - Parenthesized expressions  
 
 ### Example Inputs
-x^3 + 2x
-(x)/ (2x + 1)
-2 * x * x
+- x^3 + 2x
+- (x)/ (2x + 1)
+- 2 * x * x
 ### Example Output
 Input: (3x^2)(4x+3)
 Derivative: 36x^2 + 18x
