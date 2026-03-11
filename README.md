@@ -65,8 +65,8 @@ The system functions similarly to a lightweight computer algebra system.
 - (x)/ (2x + 1)
 - 2 * x * x
 ### Example Output
-Input: (3x^2)(4x+3)
-Derivative: 36x^2 + 18x
+## f(x) = (3x^2)(4x+3)
+## f'(x) = 36x^2 + 18x
 
 ### How to Use
 1. Clone or download the repository.
