@@ -33,7 +33,24 @@ The system functions similarly to a lightweight computer algebra system.
 - Implicit multiplication support (e.g., `4x`, `(x+1)(x-1)`)
 - Quotient rule support
 
+### Example Expression Tree
+
+## 3x^2 + 4x
+
+```
+       Add
+      /   \
+  Product  Product
+  /     \   /    \
+0     Product  3     x
+      /     \
+     3     Power
+           /   \
+          x     1
+```           
+           
 ---
+
 
 ## Supported Operations
 
@@ -44,14 +61,18 @@ The system functions similarly to a lightweight computer algebra system.
 - Parenthesized expressions  
 
 ### Example Inputs
-x^3 + 2x
-(3x^2)(4x+3)
-(x^2 + 1)/(x+1)
-
+- x^3 + 2x
+- (x)/ (2x + 1)
+- 2 * x * x
 ### Example Output
-Input: (3x^2)(4x+3)
-Derivative: 36x^2 + 18x
+## f(x) = (3x^2)(4x+3)
+## f'(x) = 36x^2 + 18x
 
+### How to Use
+1. Clone or download the repository.
+2. Open the project in Visual Studio or another C# IDE.
+3. Open Form1.cs and replace the input string on line 15 with your desired expression (**Division must have parentheses around numerator and denominator**)
+4. Run the console application
 ---
 
 ## Work in Progress
