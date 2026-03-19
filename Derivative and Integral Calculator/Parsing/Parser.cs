@@ -136,8 +136,21 @@ namespace Derivative_and_Integral_Calculator.Parsing
             {
                 return new VariableExpression(Previous().Text);
             }
+            
+            switch (Functions[position].Type)
+            {
+                case FunctionType.Sin:
+                case FunctionType.Cos:
+                case FunctionType.Tan:
+                case FunctionType.Csc:
+                case FunctionType.Sec:
+                case FunctionType.Cot:
+                //case FunctionType.Ln:
+                //case FunctionType.Log:
+                //case FunctionType.SquareRoot:
+            }
 
-            if(Match(FunctionType.LeftParenthesis))
+            if (Match(FunctionType.LeftParenthesis))
             {
                 Expression expression = ParseExpression();
                 Consume(FunctionType.RightParenthesis);

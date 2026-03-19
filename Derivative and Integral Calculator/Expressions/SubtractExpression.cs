@@ -57,5 +57,10 @@ namespace Derivative_and_Integral_Calculator.Expressions
             return new SubtractExpression(Left, Right);
 
         }
+
+        public override string Explanation()
+        {
+            return $"The derivative of a difference is the difference of the derivatives. So, we take the derivative of {Left} and subtract the derivative of {Right}.";
+        }
     }
 }

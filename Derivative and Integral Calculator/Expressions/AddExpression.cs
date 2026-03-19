@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Derivative_and_Integral_Calculator.Parsing;
 
@@ -76,6 +77,12 @@ namespace Derivative_and_Integral_Calculator.Expressions
 
             //No further simplification possible
             return new AddExpression(Left, Right);
+        }
+
+        public override string Explanation()
+        {
+            return $"To differentiate the sum of two functions, we can use the Sum Rule, which states that the derivative of a sum is the sum of the derivatives. So, we take the derivative of {Left} and add it to the derivative of {Right}.";
+            
         }
     }
 }

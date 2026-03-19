@@ -62,6 +62,7 @@ namespace Derivative_and_Integral_Calculator.Parsing
 
                         string ident = input.Substring(start, position - start);
 
+                        // Check if the identifier is a recognized function or constant, otherwise treat it as a variable
                         switch (ident)
                         {
                             case "sin": groups.Add(new Function(FunctionType.Sin, ident)); break;
@@ -70,9 +71,9 @@ namespace Derivative_and_Integral_Calculator.Parsing
                             case "sec": groups.Add(new Function(FunctionType.Sec, ident)); break;
                             case "csc": groups.Add(new Function(FunctionType.Csc, ident)); break;
                             case "cot": groups.Add(new Function(FunctionType.Cot, ident)); break;
-                            case "ln": groups.Add(new Function(FunctionType.Ln, ident)); break;
-                            case "log": groups.Add(new Function(FunctionType.Log, ident)); break;
-                            case "e": groups.Add(new Function(FunctionType.e, ident)); break;
+                            //case "ln": groups.Add(new Function(FunctionType.Ln, ident)); break;
+                            //case "log": groups.Add(new Function(FunctionType.Log, ident)); break;
+                            //case "e": groups.Add(new Function(FunctionType.e, ident)); break;
                             default:
                                 groups.Add(new Function(FunctionType.Variable, ident));
                                 break;

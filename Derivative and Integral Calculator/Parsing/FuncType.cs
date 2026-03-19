@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Derivative_and_Integral_Calculator.Parsing
 {
-    enum FunctionType
+    public enum FunctionType
     {
         Number, 
         Variable,

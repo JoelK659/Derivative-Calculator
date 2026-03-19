@@ -26,5 +26,9 @@ namespace Derivative_and_Integral_Calculator.Expressions
         {
             return this;
         }
+        public override string Explanation()
+        {
+            return $"The derivative of a constant is zero.";
+        }
     }
 }

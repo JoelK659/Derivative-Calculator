@@ -55,4 +55,12 @@ class DivideExpression : Expression
 
         return new DivideExpression(Numerator, Denominator);
     }
+
+    public override string Explanation()
+    {
+        return $"The derivative of a quotient is given by the quotient rule: (f/g)' = (f' * g - f * g') / (g^2). So, we take the derivative of {Numerator} and multiply it with {Denominator}, then subtract that by the derivative of {Denominator}" +
+            $"multiplied by {Numerator}. Finally, we divide the whole thing by {Denominator}^2";
+    }
+
+
 }

@@ -74,5 +74,10 @@ namespace Derivative_and_Integral_Calculator.Expressions
 
             return new ProductExpression(Left, Right);
         }
+
+        public override string Explanation()
+        {
+            return $"Using the product rule, the derivative of a product is: f'g + fg'. So we take the derivative of {Left} and multiply it by {Right} and add it to the derivative of {Right} multiplied by {Left}.";
+        }
     }
 }
