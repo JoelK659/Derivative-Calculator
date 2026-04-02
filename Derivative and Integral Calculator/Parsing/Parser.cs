@@ -136,20 +136,32 @@ namespace Derivative_and_Integral_Calculator.Parsing
             {
                 return new VariableExpression(Previous().Text);
             }
-            
-            switch (Functions[position].Type)
+
+            // Handle function calls such as sin(...), cos(...), ln(...), etc.
+            if (Match(FunctionType.Sin, FunctionType.Cos, FunctionType.Tan,
+                      FunctionType.Csc, FunctionType.Sec, FunctionType.Cot,
+                      FunctionType.Ln, FunctionType.Log, FunctionType.SquareRoot))
             {
-                case FunctionType.Sin:
-                case FunctionType.Cos:
-                case FunctionType.Tan:
-                case FunctionType.Csc:
-                case FunctionType.Sec:
-                case FunctionType.Cot:
-                //case FunctionType.Ln:
-                //case FunctionType.Log:
-                //case FunctionType.SquareRoot:
+                //The function token
+                var funcToken = Previous();
+                //The argument to the function, which could be parenthesized (e.g. sin(x)) or not (e.g. sin x)
+                Expression arg;
+                // Prefer parenthesized argument: sin(...)
+                if (Match(FunctionType.LeftParenthesis))
+                {
+                    arg = ParseExpression();
+                    Consume(FunctionType.RightParenthesis);
+                }
+                else
+                {
+                    // Allow syntax like "sin x" (function applied to the next factor)
+                    arg = ParseFactor();
+                }
+
+                return new FunctionExpression(funcToken.Type, arg);
             }
 
+            // Parenthesized grouping (no preceding function)
             if (Match(FunctionType.LeftParenthesis))
             {
                 Expression expression = ParseExpression();

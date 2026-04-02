@@ -41,6 +41,8 @@
             ExpButton = new Button();
             PiButton = new Button();
             Console = new TextBox();
+            ExplanationButton = new Button();
+            ExplanationBox = new TextBox();
             SuspendLayout();
             // 
             // SineButton
@@ -172,11 +174,34 @@
             Console.Size = new Size(713, 123);
             Console.TabIndex = 12;
             // 
+            // ExplanationButton
+            // 
+            ExplanationButton.BackColor = Color.LightSkyBlue;
+            ExplanationButton.FlatStyle = FlatStyle.Popup;
+            ExplanationButton.Location = new Point(590, 211);
+            ExplanationButton.Name = "ExplanationButton";
+            ExplanationButton.Size = new Size(168, 66);
+            ExplanationButton.TabIndex = 13;
+            ExplanationButton.Text = "Explain!";
+            ExplanationButton.UseVisualStyleBackColor = false;
+            ExplanationButton.Click += ExplanationButton_Click;
+            // 
+            // ExplanationBox
+            // 
+            ExplanationBox.Location = new Point(393, 301);
+            ExplanationBox.Multiline = true;
+            ExplanationBox.Name = "ExplanationBox";
+            ExplanationBox.ReadOnly = true;
+            ExplanationBox.Size = new Size(395, 137);
+            ExplanationBox.TabIndex = 14;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ExplanationBox);
+            Controls.Add(ExplanationButton);
             Controls.Add(Console);
             Controls.Add(PiButton);
             Controls.Add(ExpButton);
@@ -212,5 +237,7 @@
         private Button ExpButton;
         private Button PiButton;
         private TextBox Console;
+        private Button ExplanationButton;
+        private TextBox ExplanationBox;
     }
 }

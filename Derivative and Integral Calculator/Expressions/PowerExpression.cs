@@ -79,11 +79,5 @@ namespace Derivative_and_Integral_Calculator.Expressions
 
             return new PowerExpression(Base, Exponent);
         }
-
-        public override string Explanation()
-        {
-            return $"The derivative of a power expression is found using the power rule, which states that the derivative of f^n is n * f^(n-1). In this case, we multiply {Exponent} by {Base} and then subtract {Exponent} by 1";
-
-        }
     }
 }

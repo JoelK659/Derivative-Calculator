@@ -62,22 +62,18 @@ namespace Derivative_and_Integral_Calculator.Expressions
             }
 
             //Nested Product: (x * y) * z = x * (y * z)
-            if(Left is ProductExpression leftProd && leftProd.Right is ConstantExpression leftProdRightConst)
+            if(Left is ProductExpression leftProd && leftProd.Right is ConstantExpression leftProdRightConst && Right is ConstantExpression rightConst)
             {
-                return new ProductExpression(leftProd.Left, new ConstantExpression(leftProdRightConst.Value * (Right is ConstantExpression rightConst ? rightConst.Value : 1))).Simplify();
+                return new ProductExpression(leftProd.Left, new ConstantExpression(leftProdRightConst.Value * rightConst.Value)).Simplify();
             }
-            if(Right is ProductExpression rightProd && rightProd.Left is ConstantExpression rightProdLeftConst)
+
+            if(Right is ProductExpression rightProd && rightProd.Left is ConstantExpression rightProdLeftConst && Left is ConstantExpression leftConst)
             {
-                return new ProductExpression(new ConstantExpression(rightProdLeftConst.Value * (Left is ConstantExpression leftConst ? leftConst.Value : 1)), rightProd.Right).Simplify();
+                return new ProductExpression(new ConstantExpression(rightProdLeftConst.Value * leftConst.Value), rightProd.Right).Simplify();
             }
 
 
             return new ProductExpression(Left, Right);
-        }
-
-        public override string Explanation()
-        {
-            return $"Using the product rule, the derivative of a product is: f'g + fg'. So we take the derivative of {Left} and multiply it by {Right} and add it to the derivative of {Right} multiplied by {Left}.";
         }
     }
 }
