@@ -71,8 +71,9 @@ The system functions similarly to a lightweight computer algebra system.
 ### How to Use
 1. Clone or download the repository.
 2. Open the project in Visual Studio or another C# IDE.
-3. Open Form1.cs and replace the input string on line 15 with your desired expression (**Division must have parentheses around numerator and denominator**)
-4. Run the console application
+3. Run the console application
+4. Enter one of the example inputs, or one of your own (NOTE: Ensure divisors and dividends are enclosed in parentheses, this requirement will be fixed in time)
+5. Click the explanation button!
 ---
 
 ## Work in Progress
