@@ -21,7 +21,6 @@ namespace Derivative_and_Integral_Calculator.Parsing
         Sec,
         Cot,
         Ln,
-        Log,
         e,
         pi,
         LeftParenthesis,

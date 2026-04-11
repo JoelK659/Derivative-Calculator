@@ -188,12 +188,6 @@ namespace Derivative_and_Integral_Calculator.Parsing
                                 position += 2;
                                 continue;
                             }
-                            else if (func == "log")
-                            {
-                                groups.Add(new Function(FunctionType.Log, func));
-                                position += 3;
-                                continue;
-                            }
                         }
                         break;
                 }

@@ -1,4 +1,5 @@
 <Solution>
   <Folder Name="/Solution Items/" />
   <Project Path="Derivative and Integral Calculator/Derivative and Integral Calculator.csproj" />
+  <Project Path="DerivativeTests/DerivativeTests.csproj" Id="267aef54-bdec-4b3f-ae73-dec166d634a3" />
 </Solution>

@@ -56,4 +56,9 @@ class DivideExpression : Expression
         return new DivideExpression(Numerator, Denominator);
     }
 
+    public override string Explain(string exp)
+    {
+        return $"{Numerator} / {Denominator}: The derivative of a quotient is given by the quotient rule, which states that the derivative of {Numerator} / {Denominator} is the derivative of {Numerator} times {Denominator} minus {Numerator} times the derivative of {Denominator}, all divided by {Denominator} squared." + Environment.NewLine + Numerator.Explain(exp) + Denominator.Explain(exp);
+    }
+
 }

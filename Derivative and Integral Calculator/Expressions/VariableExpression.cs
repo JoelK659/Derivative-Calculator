@@ -26,5 +26,11 @@ namespace Derivative_and_Integral_Calculator.Expressions
         {
             return this;
         }
+
+        public override string Explain(string exp)
+        {
+            return $"{Name}: The derivative of a variable with respect to itself is always 1, so the derivative of {Name} is 1." + Environment.NewLine;
+        }
+
     }
 }

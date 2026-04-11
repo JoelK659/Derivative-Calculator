@@ -106,7 +106,11 @@ namespace Derivative_and_Integral_Calculator.Parsing
 
                 if (exponent is ConstantExpression c)
                 {
-                    return new PowerExpression(expression, (int)c.Value);
+                    return new PowerExpression(expression, (double)c.Value);
+                }
+                else if (exponent is ProductExpression p && p.Left is ConstantExpression pl && p.Right is ConstantExpression pr)
+                {
+                    return new PowerExpression(expression, (double)(pl.Value * pr.Value));
                 }
                 else
                 {
@@ -140,7 +144,7 @@ namespace Derivative_and_Integral_Calculator.Parsing
             // Handle function calls such as sin(...), cos(...), ln(...), etc.
             if (Match(FunctionType.Sin, FunctionType.Cos, FunctionType.Tan,
                       FunctionType.Csc, FunctionType.Sec, FunctionType.Cot,
-                      FunctionType.Ln, FunctionType.Log, FunctionType.SquareRoot))
+                      FunctionType.Ln, FunctionType.SquareRoot))
             {
                 //The function token
                 var funcToken = Previous();
@@ -260,7 +264,6 @@ namespace Derivative_and_Integral_Calculator.Parsing
                 case FunctionType.Sec:
                 case FunctionType.Cot:
                 case FunctionType.Ln:
-                case FunctionType.Log:
                 case FunctionType.SquareRoot:
                     return true;
                 default:

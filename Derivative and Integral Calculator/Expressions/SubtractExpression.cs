@@ -57,5 +57,11 @@ namespace Derivative_and_Integral_Calculator.Expressions
             return new SubtractExpression(Left, Right);
 
         }
+
+        public override string Explain(string exp)
+        {
+            return $"{Left} - {Right}: The derivative of a difference is the difference of the derivatives, so the derivative of {Left} - {Right} is the derivative of {Left} minus the derivative of {Right}." + Environment.NewLine + Left.Explain(exp) + Right.Explain(exp);
+        }
+
     }
 }

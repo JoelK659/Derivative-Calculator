@@ -32,6 +32,10 @@ namespace Derivative_and_Integral_Calculator.Expressions
                     return new ProductExpression(new ProductExpression(new FunctionExpression(FunctionType.Sec, innerExp), new FunctionExpression(FunctionType.Tan, innerExp)), innerExp.Differentiate());
                 case FunctionType.Cot:
                     return new ProductExpression(new ProductExpression(new ConstantExpression(-1), new PowerExpression(new FunctionExpression(FunctionType.Csc, innerExp), 2)), innerExp.Differentiate());
+                case FunctionType.Ln:
+                    return new ProductExpression(new PowerExpression(innerExp, -1), innerExp.Differentiate());
+                case FunctionType.SquareRoot:
+                    return new ProductExpression(new PowerExpression(innerExp, -0.5), innerExp.Differentiate());
                 default:
                     throw new NotImplementedException();
             }
@@ -46,6 +50,11 @@ namespace Derivative_and_Integral_Calculator.Expressions
         {
             innerExp = innerExp.Simplify();
             return this;
+        }
+
+        public override string Explain(string exp)
+        {
+            return $"{func.Text}{innerExp.ToString()}: The derivative of {func.Text} is given by the chain rule, which states that the derivative of {func.Text}{innerExp.ToString()} is the derivative of the outer function evaluated at the inner function, multiplied by the derivative of the inner function." + Environment.NewLine + innerExp.Explain(exp);
         }
     }
 }

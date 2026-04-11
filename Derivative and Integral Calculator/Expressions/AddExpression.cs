@@ -24,7 +24,6 @@ namespace Derivative_and_Integral_Calculator.Expressions
 
         public override string ToString()
         {
-            explanation
             //return $"{Left} + {Right}";
             return $"({Left} + {Right})";
         }
@@ -61,13 +60,13 @@ namespace Derivative_and_Integral_Calculator.Expressions
             }
 
             //Nested Adds: (x + 2) + 3 = x + 5 or 2 + (x + 3) = x + 5
-            if (Left is AddExpression leftAdd && leftAdd.Right is ConstantExpression leftAddRightConst)
+            if (Left is AddExpression leftAdd && leftAdd.Right is ConstantExpression leftAddRightConst && Right is ConstantExpression rc)
             {
-                return new AddExpression(leftAdd.Left, new ConstantExpression(leftAddRightConst.Value + (Right is ConstantExpression rightAddConst ? rightAddConst.Value : 0))).Simplify();
+                return new AddExpression(leftAdd.Left, new ConstantExpression(leftAddRightConst.Value + rc.Value)).Simplify();
             }
-            if (Right is AddExpression rightAdd && rightAdd.Left is ConstantExpression rightAddLeftConst)
+            if (Right is AddExpression rightAdd && rightAdd.Left is ConstantExpression rightAddLeftConst && Left is ConstantExpression lc)
             {
-                return new AddExpression(rightAdd.Right, new ConstantExpression(rightAddLeftConst.Value + (Left is ConstantExpression leftAddConst ? leftAddConst.Value : 0))).Simplify();
+                return new AddExpression(rightAdd.Right, new ConstantExpression(rightAddLeftConst.Value + lc.Value)).Simplify();
             }
 
             //Hierarchical Reorder: 2 + x^2 = x^2 + 2
@@ -78,6 +77,11 @@ namespace Derivative_and_Integral_Calculator.Expressions
 
             //No further simplification possible
             return new AddExpression(Left, Right);
+        }
+
+        public override string Explain(string exp)
+        {
+            return $"{Left} + {Right}: The derivative of a sum is the sum of the derivatives, so the derivative of {Left} + {Right} is the derivative of {Left} plus the derivative of {Right}." + Environment.NewLine + Left.Explain(Left.ToString()) + Right.Explain(Right.ToString());
         }
     }
 }

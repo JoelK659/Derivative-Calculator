@@ -12,5 +12,7 @@ namespace Derivative_and_Integral_Calculator.Expressions
         public abstract override string ToString();
         //Each expression should know how to simplify itself
         public abstract Expression Simplify();
+
+        public abstract string Explain(string exp);
     }
 }

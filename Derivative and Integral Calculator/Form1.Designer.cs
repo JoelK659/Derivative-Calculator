@@ -35,7 +35,6 @@
             SecantButton = new Button();
             CotangentButton = new Button();
             NaturalLogButton = new Button();
-            LogButton = new Button();
             EButton = new Button();
             SqrtButton = new Button();
             ExpButton = new Button();
@@ -43,6 +42,7 @@
             Console = new TextBox();
             ExplanationButton = new Button();
             ExplanationBox = new TextBox();
+            EnterButton = new Button();
             SuspendLayout();
             // 
             // SineButton
@@ -107,23 +107,13 @@
             // 
             // NaturalLogButton
             // 
-            NaturalLogButton.Location = new Point(18, 370);
+            NaturalLogButton.Location = new Point(113, 370);
             NaturalLogButton.Name = "NaturalLogButton";
             NaturalLogButton.Size = new Size(75, 23);
             NaturalLogButton.TabIndex = 6;
             NaturalLogButton.Text = "ln";
             NaturalLogButton.UseVisualStyleBackColor = true;
             NaturalLogButton.Click += NaturalLogButton_Click;
-            // 
-            // LogButton
-            // 
-            LogButton.Location = new Point(113, 370);
-            LogButton.Name = "LogButton";
-            LogButton.Size = new Size(75, 23);
-            LogButton.TabIndex = 7;
-            LogButton.Text = "log";
-            LogButton.UseVisualStyleBackColor = true;
-            LogButton.Click += LogButton_Click;
             // 
             // EButton
             // 
@@ -157,7 +147,7 @@
             // 
             // PiButton
             // 
-            PiButton.Location = new Point(207, 408);
+            PiButton.Location = new Point(18, 370);
             PiButton.Name = "PiButton";
             PiButton.Size = new Size(75, 23);
             PiButton.TabIndex = 11;
@@ -178,9 +168,9 @@
             // 
             ExplanationButton.BackColor = Color.LightSkyBlue;
             ExplanationButton.FlatStyle = FlatStyle.Popup;
-            ExplanationButton.Location = new Point(590, 211);
+            ExplanationButton.Location = new Point(678, 196);
             ExplanationButton.Name = "ExplanationButton";
-            ExplanationButton.Size = new Size(168, 66);
+            ExplanationButton.Size = new Size(80, 33);
             ExplanationButton.TabIndex = 13;
             ExplanationButton.Text = "Explain!";
             ExplanationButton.UseVisualStyleBackColor = false;
@@ -188,18 +178,31 @@
             // 
             // ExplanationBox
             // 
-            ExplanationBox.Location = new Point(393, 301);
+            ExplanationBox.Location = new Point(333, 235);
             ExplanationBox.Multiline = true;
             ExplanationBox.Name = "ExplanationBox";
             ExplanationBox.ReadOnly = true;
-            ExplanationBox.Size = new Size(395, 137);
+            ExplanationBox.Size = new Size(464, 216);
             ExplanationBox.TabIndex = 14;
+            // 
+            // EnterButton
+            // 
+            EnterButton.BackColor = Color.Firebrick;
+            EnterButton.FlatStyle = FlatStyle.Popup;
+            EnterButton.Location = new Point(207, 408);
+            EnterButton.Name = "EnterButton";
+            EnterButton.Size = new Size(75, 23);
+            EnterButton.TabIndex = 15;
+            EnterButton.Text = "Enter";
+            EnterButton.UseVisualStyleBackColor = false;
+            EnterButton.Click += EnterButton_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(EnterButton);
             Controls.Add(ExplanationBox);
             Controls.Add(ExplanationButton);
             Controls.Add(Console);
@@ -207,7 +210,6 @@
             Controls.Add(ExpButton);
             Controls.Add(SqrtButton);
             Controls.Add(EButton);
-            Controls.Add(LogButton);
             Controls.Add(NaturalLogButton);
             Controls.Add(CotangentButton);
             Controls.Add(SecantButton);
@@ -231,7 +233,6 @@
         private Button SecantButton;
         private Button CotangentButton;
         private Button NaturalLogButton;
-        private Button LogButton;
         private Button EButton;
         private Button SqrtButton;
         private Button ExpButton;
@@ -239,5 +240,6 @@
         private TextBox Console;
         private Button ExplanationButton;
         private TextBox ExplanationBox;
+        private Button EnterButton;
     }
 }

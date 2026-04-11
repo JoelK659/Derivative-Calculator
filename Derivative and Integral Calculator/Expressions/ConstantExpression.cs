@@ -26,5 +26,10 @@ namespace Derivative_and_Integral_Calculator.Expressions
         {
             return this;
         }
+
+        public override string Explain(string exp)
+        {
+            return $"{Value}: The derivative of a constant is always 0, so the derivative of {Value} is 0." + Environment.NewLine;
+        }
     }
 }

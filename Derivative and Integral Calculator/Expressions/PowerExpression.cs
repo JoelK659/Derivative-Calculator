@@ -7,9 +7,9 @@ namespace Derivative_and_Integral_Calculator.Expressions
     class PowerExpression : Expression
     {
         public Expression Base;
-        public int Exponent;
+        public double Exponent;
 
-        public PowerExpression(Expression baseExpr, int exponent)
+        public PowerExpression(Expression baseExpr, double exponent)
         {
             Base = baseExpr;
             Exponent = exponent;
@@ -79,5 +79,11 @@ namespace Derivative_and_Integral_Calculator.Expressions
 
             return new PowerExpression(Base, Exponent);
         }
+
+        public override string Explain(string exp)
+        {
+            return $"{Base}^{Exponent}: The derivative of a power is given by the power rule, which states that the derivative of {Base}^{Exponent} is {Exponent} times {Base} raised to the power of {Exponent - 1}, multiplied by the derivative of {Base}." + Environment.NewLine;
+        }
     }
+
 }
