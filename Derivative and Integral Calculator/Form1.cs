@@ -116,6 +116,22 @@ namespace Derivative_and_Integral_Calculator
             ExplanationButton.Visible = true;
             ExplanationButton.Enabled = true;
         }
+
+        private void Clear_Button_Click(object sender, EventArgs e)
+        {
+            Console.Text = "";
+        }
+
+        private void Console_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Suppress the default function of the Enter key (e.g., adding a new line)
+                EnterButton_Click(sender, e);
+                e.Handled = true;
+
+            }
+        }
     }
 
 

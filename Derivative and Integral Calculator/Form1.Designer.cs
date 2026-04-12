@@ -43,6 +43,7 @@
             ExplanationButton = new Button();
             ExplanationBox = new TextBox();
             EnterButton = new Button();
+            Clear_Button = new Button();
             SuspendLayout();
             // 
             // SineButton
@@ -163,6 +164,7 @@
             Console.Name = "Console";
             Console.Size = new Size(713, 123);
             Console.TabIndex = 12;
+            Console.KeyDown += Console_KeyDown;
             // 
             // ExplanationButton
             // 
@@ -197,11 +199,24 @@
             EnterButton.UseVisualStyleBackColor = false;
             EnterButton.Click += EnterButton_Click;
             // 
+            // Clear_Button
+            // 
+            Clear_Button.BackColor = Color.FromArgb(255, 128, 128);
+            Clear_Button.FlatStyle = FlatStyle.Popup;
+            Clear_Button.Location = new Point(18, 209);
+            Clear_Button.Name = "Clear_Button";
+            Clear_Button.Size = new Size(75, 46);
+            Clear_Button.TabIndex = 16;
+            Clear_Button.Text = "Clear";
+            Clear_Button.UseVisualStyleBackColor = false;
+            Clear_Button.Click += Clear_Button_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(Clear_Button);
             Controls.Add(EnterButton);
             Controls.Add(ExplanationBox);
             Controls.Add(ExplanationButton);
@@ -217,9 +232,9 @@
             Controls.Add(TangentButton);
             Controls.Add(CosineButton);
             Controls.Add(SineButton);
+            KeyPreview = true;
             Name = "Form1";
             Text = "Form1";
-            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -241,5 +256,6 @@
         private Button ExplanationButton;
         private TextBox ExplanationBox;
         private Button EnterButton;
+        private Button Clear_Button;
     }
 }
